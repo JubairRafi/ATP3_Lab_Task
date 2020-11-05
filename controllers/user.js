@@ -14,10 +14,11 @@ router.post('/create', (req, res)=>{
 	
 	if(req.cookies['uname'] != ""){
 		
-		/*var user = [req.body.uname, req.body.password, req.body.email];
-		var newlist = req.session.userlist;
-		newlist.push(user);
-		req.session.userlist = newlist;*/
+		var user = [req.body.username, req.body.password, req.body.email];
+		 req.session.userlist.push(user);
+		// newlist.push(user);
+		console.log(user,req.session.userlist);
+		// req.session.userlist = newlist;
 		
 		res.send('New user info:'+
 					"<br> Username: "+req.body.username+
