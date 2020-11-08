@@ -11,9 +11,9 @@ let userlist = [
 ];
 
 router.get('/', (req, res)=>{
-	if (req.session.userlist ==0) {
-		req.session.userlist = userlist;
-	}
+	// if (req.session.userlist ==0) {
+	// 	req.session.userlist = userlist;
+	// }
 
 	if(req.cookies['uname'] != null){
 		res.render('home/index', {name: 'alamin', id:'123'});		
