@@ -24,13 +24,13 @@
 		<% users.forEach( function(std,i){ %>
 			<%console.log(i++); %>
 			<tr>
-				<td><%= i+1 %></td>
+				<td><%= i %></td>
 				<td><%= std[0] %></td>
 				<td><%= std[1] %></td>
 				<td><%= std[2] %></td>
 				<td>
 					<a href="/user/edit/<%= i %>">Edit</a> |
-					<a href="/user/delete/<%= std[0] %>">Delete</a>
+					<a href="/user/delete/<%= i %>">Delete</a>
 				</td>
 			</tr>
 
