@@ -80,19 +80,34 @@ router.post('/edit/:id', (req, res)=>{
 });
 
 router.get('/delete/:id', (req, res)=>{
+	const id = req.params.id;
 	
 	if(req.cookies['uname'] != ""){
-		var user = {username: 'alamin', password: '123', email: 'email@gmail.com'};
-		res.render('user/delete', user);
+
+		req.session.userlist.forEach((e,i)=>{
+			
+			if((i+1)==id){
+				
+				dltUser = e;
+			
+			}
+		})
+		console.log(dltUser);
+		res.render('user/delete',{user:dltUser});
 	}else{
 		res.redirect('/login');
 	}
 });
 
+
 router.post('/delete/:id', (req, res)=>{
+	const id = req.params.id;
+	const index = id-1
 	
 	if(req.cookies['uname'] != ""){
 		//res.send('done!');
+		req.session.userlist.splice(index,1);
+		
 		res.redirect('/home/userlist');
 	}else{
 		res.redirect('/login');
