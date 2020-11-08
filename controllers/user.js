@@ -36,22 +36,43 @@ router.get('/edit/:id', (req, res)=>{
 	
 	if(req.cookies['uname'] != ""){
 		
+		const id = req.params.id;
+		console.log("id",id);
 		var user = {
 			username: 'test',
 			password: 'test',
 			email: 'alamin@aiub.edu'
 		};
 
-		res.render('user/edit', user);
+		req.session.userlist.forEach((e,i)=>{
+			
+			if((i+1)==id){
+				
+				editUser = e;
+			
+			}
+		})
+		console.log(editUser);
+
+		res.render('user/edit', {user:editUser});
 	}else{
 		res.redirect('/login');
 	}
 });
 
 router.post('/edit/:id', (req, res)=>{
-	
+		const uname = req.body.username;
+		const pass = req.body.password;
+		const email = req.body.email;
+
+		const id = req.params.id;
 	if(req.cookies['uname'] != ""){
-		//res.send('updated');
+		
+		 req.session.userlist[id-1][0] = uname;
+		 req.session.userlist[id-1][1] = pass;
+		 req.session.userlist[id-1][2] = email;
+		
+		console.log("check", req.session.userlist);
 		res.redirect('/home/userlist');
 	}else{
 		res.redirect('/login');
